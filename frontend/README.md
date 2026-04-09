@@ -1,52 +1,70 @@
-# ============================================================
-# SeguriTurno — Frontend Dockerfile (multi-stage)
-# ============================================================
+# Getting Started with Create React App
 
-# Etapa 1: Build
-FROM node:20-alpine AS builder
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-WORKDIR /app
+## Available Scripts
 
-# Args para variables de entorno en tiempo de build
-ARG REACT_APP_BACKEND_URL
-ARG REACT_APP_NAME=SeguriTurno
-ARG REACT_APP_VERSION=2.0.0
+In the project directory, you can run:
 
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL \
-    REACT_APP_NAME=$REACT_APP_NAME \
-    REACT_APP_VERSION=$REACT_APP_VERSION
+### `npm start`
 
-# Instalar dependencias
-COPY package.json yarn.lock* ./
-RUN yarn install --frozen-lockfile
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-# Build de producción
-COPY . .
-RUN yarn build
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-# Etapa 2: Servir con Nginx
-FROM nginx:alpine
+### `npm test`
 
-# Copiar build
-COPY --from=builder /app/build /usr/share/nginx/html
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# Configuración de Nginx para SPA (React Router)
-RUN echo 'server { \
-    listen 80; \
-    root /usr/share/nginx/html; \
-    index index.html; \
-    location / { \
-        try_files $uri $uri/ /index.html; \
-    } \
-    location /api { \
-        proxy_pass http://backend:8001; \
-        proxy_set_header Host $host; \
-        proxy_set_header X-Real-IP $remote_addr; \
-    } \
-    gzip on; \
-    gzip_types text/plain text/css application/json application/javascript; \
-}' > /etc/nginx/conf.d/default.conf
+### `npm run build`
 
-EXPOSE 80
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-CMD ["nginx", "-g", "daemon off;"]
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,14 +1,9 @@
-# ============================================================
-# SeguriTurno Frontend — Variables de entorno para Vercel
-# ============================================================
-# En Vercel estas variables se configuran en:
-# Dashboard → Tu proyecto → Settings → Environment Variables
-#
-# NO subas este archivo con valores reales a Git
-# ============================================================
-
-# URL de tu backend en Render (la obtienes al crear el servicio)
-REACT_APP_BACKEND_URL=https://seguriturno-api.onrender.com
-
-REACT_APP_NAME=SeguriTurno
-REACT_APP_VERSION=2.0.0
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"]
+}
