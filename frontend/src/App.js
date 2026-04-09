@@ -1,9 +1,11 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import "@/App.css";
+import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "./components/ui/sonner";
 import { toast } from "sonner";
+
+// Pages
 
 // Pages
 import Login from "@/pages/Login";
