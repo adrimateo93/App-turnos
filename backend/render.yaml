@@ -1,0 +1,16 @@
+# Render.com Deployment Configuration for Seguriturno Backend
+
+services:
+  - type: web
+    name: seguriturno-backend
+    env: python
+    plan: starter
+    buildCommand: pip install .
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    routes:
+      - src: /static
+        dest: static/
+      - src: /api
+        dest: /api/
+      - src: /
+        dest: /index.html

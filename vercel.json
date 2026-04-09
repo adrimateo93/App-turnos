@@ -1,0 +1,1 @@
+{\n  \"version\": 2,\n  \"static-build\": {\n    \"entrypoint\": \"build/index.html\",\n    \"routes\": {\n      \"/\": {\n        \"src\": \"build/index.html\"\n      },\n      \"/your-path\": {\n        \"src\": \"build/your-file.html\"\n      }\n    }\n  }\n}
